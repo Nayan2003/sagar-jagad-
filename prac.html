@@ -1,1 +1,23 @@
-print("nayan")
+Install Java
+sudo apt install openjdk-8-jdk-headless
+Verify the installed version of Java.
+java -version
+Create Hadoop User and Configure Password-less SSH
+Add a new user hadoop.
+sudo adduser hadoop
+Add the hadoop user to the sudo group.
+sudo usermod -aG sudo hadoop
+Install the OpenSSH server and client.
+sudo apt install openssh-server openssh-client -y
+When you get a prompt, respond with: keep the local version currently installed
+Log in with hadoop user.
+sudo su - hadoop
+Generate public and private key pairs.
+ssh-keygen -t rsa
+(don’t add password just press enter as many times to reach normal prompt)
+Add the generated public key from id_rsa.pub to authorized_keys.
+sudo cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+Change the permissions of the authorized_keys file.
+sudo chmod 640 ~/.ssh/authorized_keys
+Verify if the password-less SSH is functional.
+ssh localhost
